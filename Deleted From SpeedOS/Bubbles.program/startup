@@ -1,6 +1,3 @@
-os.loadAPI("loader")
-SpeedOS = loader.OS()
-
 SpeedOS.ToolBarColour = colours.blue
 SpeedOS.ToolBarTextColour = colours.white
 local bubbles = {}
