@@ -6,9 +6,6 @@
 -- if more then 3, die
 -- if has exactly 3 and is dead, live
 
-os.loadAPI("loader")
-SpeedOS = loader.OS()
-
 SpeedOS.ToolBarColour = colours.lightGrey
 SpeedOS.ToolBarTextColour = colours.white
 
