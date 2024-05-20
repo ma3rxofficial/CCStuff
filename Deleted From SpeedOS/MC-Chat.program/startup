@@ -1,10 +1,10 @@
-SpeedOS.LoadAPI("SpeedAPI/windows")
-SpeedOS.LoadAPI("SpeedAPI/config")
-
 if SpeedOS then
   SpeedOS.ToolBarColour = colours.black
   SpeedOS.ToolBarTextColour = colours.white
 end
+
+SpeedOS.LoadAPI("SpeedAPI/windows")
+SpeedOS.LoadAPI("SpeedAPI/config")
 
 pathToConfig = "System/MC-Chat.settings"
 
