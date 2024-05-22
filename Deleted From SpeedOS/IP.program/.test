@@ -1,4 +1,0 @@
-while true do
-  print("hohli sosat")
-  sleep(1)
-end
