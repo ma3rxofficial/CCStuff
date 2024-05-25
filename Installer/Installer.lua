@@ -1,4 +1,4 @@
-local XSize, YSize = term.getSize()
+local XSize, YSize = term.getSize() 
 local ColorGray = colors.gray
 local ColorLightGray = colors.lightGray
 local ColorDownloadBack = colors.gray
