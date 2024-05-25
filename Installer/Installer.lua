@@ -1,4 +1,3 @@
-tArgs = {...}
 local XSize, YSize = term.getSize()
 local ColorGray = colors.gray
 local ColorLightGray = colors.lightGray
