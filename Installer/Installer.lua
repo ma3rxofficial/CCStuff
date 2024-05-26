@@ -1,9 +1,3 @@
-local XSize, YSize = term.getSize()
-local ColorGray = colors.gray
-local ColorLightGray = colors.lightGray
-local ColorDownloadBack = colors.gray
-local ColorDownloadFront = colors.lightBlue
-
 function FancyError()
   term.setBackgroundColor(colours.grey)
   term.setTextColor(colours.white)
@@ -38,11 +32,49 @@ function FancyError()
   error()
 end
 
-if not http.get("https://raw.githubusercontent.com/ma3rxofficial/ComputerCraft/main/startup") then
+term.setBackgroundColor(colors.black)
+term.setTextColor(colors.white)
+print("Downloading API...")
+sleep(1)
+
+print("Connecting to github.com...")
+API_zapros = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
+sleep(2)
+
+if not API_zapros or not API_zapros2 then
+	FancyError()
+end
+
+print("Writing data to API file...")
+sleep(1)
+
+APIfile = fs.open("windows", "w")
+
+APIfile.write(API_zapros.readAll())
+
+sleep(1)
+print("Done! Closing API file...")
+sleep(0.5)
+
+APIfile.close()
+
+print("Done!")
+
+if not http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
 	FancyError()
 end
 
 os.setComputerLabel("SpeedOS #"..os.getComputerID())
+sleep(0.8)
+print("Label ".."SpeedOS #"..tostring(os.getComputerID()).." set!")
+
+sleep(1)
+print("Loading API...")
+
+os.loadAPI("windows")
+sleep(3)
+print("API loading done!")
+sleep(1)
 
 local pizdapki = {"Desktop", "Programs", "SpeedAPI", "System", ".version", "crash", "startup"}
 
@@ -52,23 +84,6 @@ for _, papka in pairs(pizdapki) do
 	end
 end
 
-function cPrint(string, y2)
-
-        local tX, tY = term.getSize()
-        local b = string.len(string) / 2
-        local x = (tX / 2) - b
-	local y = tY / 2
-	
-	if y2 then
-	  y = y2
-	end
-
-        term.setCursorPos(x, y)
-        term.write(string)
-end
-
-
-
 if not term.isColor or not term.isColor() then
 	error('SpeedOS Requires an Advanced (gold) Computer')
 end
@@ -77,66 +92,27 @@ if turtle then
 	error('Idi nahui')
 end
 
-local function centerText(how,coord,text,textColor,backColor)
-    term.setTextColor(textColor)
-    term.setBackgroundColor(backColor)
-    if how == "xy" then
-        term.setCursorPos(math.floor(XSize/2-#text/2),math.floor(YSize/2))
-    elseif how == "x" then
-        term.setCursorPos(math.floor(XSize/2-#text/2),coord)
-    elseif how == "y" then
-        term.setCursorPos(coord,math.floor(YSize/2))
-    end
-    term.write(text)
-end
-
-local function horisontalBar(x,y,width,color)
-    for i=x,(x+width-1) do
-        paintutils.drawPixel(i,y,color)
-    end
-end
-
-local function progressBar(size,action,percent,action2)
-    local doneSize = math.ceil(percent/100*size)
-    local startingY = math.floor(YSize/2-1)
-    local startingX = math.floor(XSize/2-size/2)
-    horisontalBar(1,startingY,XSize,colors.white)
-    centerText("x",startingY,"Downloading"..action,ColorGray,colors.white)
-    horisontalBar(startingX,startingY+2,size,ColorDownloadBack)
-    horisontalBar(startingX,startingY+2,doneSize,ColorDownloadFront)
-end
-
-local function progressBar2(size,action,percent,action2)
-    local doneSize = math.ceil(percent/100*size)
-    local startingY = math.floor(YSize/2-1)
-    local startingX = math.floor(XSize/2-size/2)
-    horisontalBar(1,startingY,XSize,colors.white)
-    centerText("x",startingY,action,ColorGray,colors.white)
-    horisontalBar(startingX,startingY+2,size,colors.gray)
-    horisontalBar(startingX,startingY+2,doneSize,colors.lightGray)
-end
-
 term.setBackgroundColor(colors.white)
 term.clear()
-progressBar2(20,"SpeedOS",0,nil)
+windows.progressBar2(20,"SpeedOS",0,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",14,nil)
+windows.progressBar2(20,"SpeedOS",14,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",20,nil)
+windows.progressBar2(20,"SpeedOS",20,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",30,nil)
+windows.progressBar2(20,"SpeedOS",30,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",37,nil)
+windows.progressBar2(20,"SpeedOS",37,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",50,nil)
+windows.progressBar2(20,"SpeedOS",50,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",67,nil)
+windows.progressBar2(20,"SpeedOS",67,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",83,nil)
+windows.progressBar2(20,"SpeedOS",83,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",90,nil)
+windows.progressBar2(20,"SpeedOS",90,nil)
 sleep(3)
-progressBar2(20,"SpeedOS",100,nil)
+windows.progressBar2(20,"SpeedOS",100,nil)
 sleep(1)
 
 _jstr = [[
@@ -525,15 +501,15 @@ function Draw(Downloader, action2)
 		term.clear()
 		if not math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)) then
 			if action2 then
-				progressBar(20," started",Downloader,action2)
+				windows.progressBar(20," started",Downloader,action2)
 			else
-				progressBar(20," started",Downloadr)
+				windows.progressBar(20," started",Downloadr)
 			end
 		else
 			if action2 then
-				progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader,action2)
+				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader,action2)
 			else
-				progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader)
+				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader)
 			end
 		end
 	end
