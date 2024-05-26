@@ -53,8 +53,6 @@ APIfile = fs.open("windows", "w")
 APIfile.write(API_zapros.readAll())
 APIfile.close()
 
-print("Done!")
-
 if not http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
 	FancyError()
 end
@@ -66,7 +64,7 @@ print("Loading API...")
 
 os.loadAPI("windows")
 sleep(3)
-print("API loading done!")
+print("Running installer...")
 sleep(1)
 
 local pizdapki = {"Desktop", "Programs", "SpeedAPI", "System", ".version", "crash", "startup"}
