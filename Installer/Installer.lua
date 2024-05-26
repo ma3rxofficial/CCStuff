@@ -41,7 +41,7 @@ print("Connecting to github.com...")
 API_zapros = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
 sleep(2)
 
-if not API_zapros or not API_zapros2 then
+if not API_zapros then
 	FancyError()
 end
 
