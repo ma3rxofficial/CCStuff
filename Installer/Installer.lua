@@ -51,11 +51,6 @@ sleep(1)
 APIfile = fs.open("windows", "w")
 
 APIfile.write(API_zapros.readAll())
-
-sleep(1)
-print("Done! Closing API file...")
-sleep(0.5)
-
 APIfile.close()
 
 print("Done!")
@@ -65,8 +60,6 @@ if not http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/In
 end
 
 os.setComputerLabel("SpeedOS #"..os.getComputerID())
-sleep(0.8)
-print("Label ".."SpeedOS #"..tostring(os.getComputerID()).." set!")
 
 sleep(1)
 print("Loading API...")
