@@ -657,5 +657,8 @@ h.close()
 mainTitle = 'Installation Complete!'
 subTitle = 'Rebooting in 1 second...'
 Draw()
+
+os.unloadAPI("windows")
+fs.delete("windows")
 sleep(1)
 os.reboot()
