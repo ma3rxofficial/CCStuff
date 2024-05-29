@@ -459,11 +459,18 @@ end
 local mainTitle = 'SpeedOS Installer'
 local subTitle = 'Please wait...'
 
-function Draw(Downloader, action2)
+function Draw(Downloader, action2, pizdec)
 	sleep(0)
 	if not Downloader then
 		term.setBackgroundColour(colours.white)
 		term.clear()
+		
+		if pizdec then 
+			term.setTextColor(colors.lightGray)
+			term.setCursorPos(1, 19)
+			term.write(pizdec)
+		end
+		
 		local w, h = term.getSize()
 		term.setTextColour(colours.black)
 		term.setCursorPos(math.ceil((w-#mainTitle)/2), 8)
@@ -474,6 +481,13 @@ function Draw(Downloader, action2)
 	else
 		term.setBackgroundColour(colours.white)
 		term.clear()
+
+		if pizdec then 
+			term.setTextColor(colors.lightGray)
+			term.setCursorPos(1, 19)
+			term.write(pizdec)
+		end
+		
 		if not math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)) then
 			if action2 then
 				windows.progressBar(20," started",Downloader,action2)
@@ -581,7 +595,7 @@ function downloadBlob(v)
 	end
 	if v.type == 'tree' then
 		subTitle2 = string.sub(Settings.InstallPath..v.path, 2)
-		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
+		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2, subTitle2)
 		fs.makeDir('/'..Settings.InstallPath..v.path)
 
 		term.setCursorPos(1, 19)
@@ -590,7 +604,7 @@ function downloadBlob(v)
 		term.write(subTitle2)
 	else
 		subTitle2 = string.sub(Settings.InstallPath..v.path, 2)
-		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
+		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2, subTitle2)
 
 		term.setCursorPos(1, 19)
 		term.setTextColor(colors.lightGray)
