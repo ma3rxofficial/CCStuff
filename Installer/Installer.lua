@@ -585,7 +585,7 @@ function downloadBlob(v)
 		fs.makeDir('/'..Settings.InstallPath..v.path)
 
 		term.setCursorPos(1, 19)
-		term.setTextColor(colors.lightGray)
+		term.setTextColor(colors.gray)
 		term.setBackgroundColor(colors.white)
 		term.write(subTitle2)
 	else
@@ -593,7 +593,7 @@ function downloadBlob(v)
 		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
 
 		term.setCursorPos(1, 19)
-		term.setTextColor(colors.lightGray)
+		term.setTextColor(colors.gray)
 		term.setBackgroundColor(colors.white)
 		term.write(subTitle2)
 
