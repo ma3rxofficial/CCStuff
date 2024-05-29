@@ -482,9 +482,9 @@ function Draw(Downloader, action2)
 			end
 		else
 			if action2 then
-				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader,action2)
+				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%", Downloader, action2)
 			else
-				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%",Downloader)
+				windows.progressBar(20," "..math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)).."%", Downloader)
 			end
 		end
 	end
@@ -586,6 +586,10 @@ function downloadBlob(v)
 	else
 		subTitle2 = 'Loading: '..Settings.InstallPath..v.path
 		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
+
+		term.setCursorPos(1, 19)
+		term.setTextColor(colors.lightGray)
+		term.write(subTitle2)
 
         local tries, f = 0
         repeat 
