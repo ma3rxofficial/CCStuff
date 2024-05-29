@@ -580,7 +580,7 @@ function downloadBlob(v)
 		return
 	end
 	if v.type == 'tree' then
-		subTitle2 = Settings.InstallPath..v.path
+		subTitle2 = string.sub(Settings.InstallPath..v.path, 2)
 		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
 		fs.makeDir('/'..Settings.InstallPath..v.path)
 
@@ -589,7 +589,7 @@ function downloadBlob(v)
 		term.setBackgroundColor(colors.white)
 		term.write(subTitle2)
 	else
-		subTitle2 = Settings.InstallPath..v.path
+		subTitle2 = string.sub(Settings.InstallPath..v.path, 2)
 		Draw(math.floor(100*(Settings.DownloadedBytes/Settings.TotalBytes)), subTitle2)
 
 		term.setCursorPos(1, 19)
