@@ -32,21 +32,11 @@ function FancyError()
   error()
 end
 
-term.setBackgroundColor(colors.black)
-term.setTextColor(colors.white)
-print("Downloading API...")
-sleep(1)
-
-print("Connecting to github.com...")
 API_zapros = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
-sleep(2)
 
 if not API_zapros then
 	FancyError()
 end
-
-print("Writing data to API file...")
-sleep(1)
 
 APIfile = fs.open("windows", "w")
 
@@ -59,13 +49,7 @@ end
 
 os.setComputerLabel("SpeedOS #"..os.getComputerID())
 
-sleep(1)
-print("Loading API...")
-
 os.loadAPI("windows")
-sleep(3)
-print("Running installer...")
-sleep(1)
 
 local pizdapki = {"Desktop", "Programs", "SpeedAPI", "System", ".version", "crash", "startup"}
 
