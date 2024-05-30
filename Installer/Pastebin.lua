@@ -1,3 +1,5 @@
+-- Pastebin version
+
 function FancyError()
   term.setBackgroundColor(colours.grey)
   term.setTextColor(colours.white)
