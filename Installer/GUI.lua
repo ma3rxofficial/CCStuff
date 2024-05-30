@@ -1,8 +1,8 @@
 local XSize, YSize = term.getSize()
 local ColorGray = colors.gray
 local ColorLightGray = colors.lightGray
-local ColorDownloadBack = colors.lightGray
-local ColorDownloadFront = colors.blue
+local ColorDownloadBack = colors.gray
+local ColorDownloadFront = colors.lightBlue
 
 function centerText(how,coord,text,textColor,backColor)
     term.setTextColor(textColor)
