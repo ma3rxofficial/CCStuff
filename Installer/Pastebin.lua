@@ -1,5 +1,3 @@
--- Pastebin version
-
 function FancyError()
   term.setBackgroundColor(colours.grey)
   term.setTextColor(colours.white)
@@ -44,4 +42,4 @@ file = fs.open("Installer.lua", "w")
 file.write(zapros.readAll())
 file.close()
 
-shell.run("installer")
+shell.run("Installer.lua")
