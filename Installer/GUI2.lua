@@ -28,7 +28,7 @@ function progressBar(size,action,percent,action2)
     local startingY = math.floor(YSize/2-1)
     local startingX = math.floor(XSize/2-size/2)
     horisontalBar(1,startingY,XSize,colors.white)
-    centerText("x",startingY,"Downloading"..action,ColorGray,colors.white)
+    centerText("x",startingY,"Updating"..action,ColorGray,colors.white)
     horisontalBar(startingX,startingY+2,size,ColorDownloadBack)
     horisontalBar(startingX,startingY+2,doneSize,ColorDownloadFront)
 end
