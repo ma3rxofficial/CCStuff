@@ -6,7 +6,9 @@ local ColorDownloadFront = colors.blue
 
 function centerText(how,coord,text,textColor,backColor)
     term.setTextColor(textColor)
-    term.setBackgroundColor(backColor)
+    if backColor then
+        term.setBackgroundColor(backColor)
+    end
     if how == "xy" then
         term.setCursorPos(math.floor(XSize/2-#text/2),math.floor(YSize/2))
     elseif how == "x" then
@@ -31,6 +33,7 @@ function progressBar(size,action,percent,action2)
     centerText("x",startingY,"Installing update",colors.blue,colors.white)
     horisontalBar(startingX,startingY+2,size,ColorDownloadBack)
     horisontalBar(startingX,startingY+2,doneSize,ColorDownloadFront)
+    сenterText("x",startingY+2,colors.white)
     centerText("x",startingY+4,"Done"..action,colors.black,colors.white)
 end
 
