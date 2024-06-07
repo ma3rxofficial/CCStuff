@@ -1,5 +1,5 @@
 local XSize, YSize = term.getSize()
-local ColorGray = colors.gray
+local ColorGray = colors.lightBlue
 local ColorLightGray = colors.lightGray
 local ColorDownloadBack = colors.lightGray
 local ColorDownloadFront = colors.blue
@@ -28,9 +28,10 @@ function progressBar(size,action,percent,action2)
     local startingY = math.floor(YSize/2-1)
     local startingX = math.floor(XSize/2-size/2)
     horisontalBar(1,startingY,XSize,colors.white)
-    centerText("x",startingY,"Updating"..action,ColorGray,colors.white)
+    centerText("x",startingY,"Installing update",ColorGray,colors.white)
     horisontalBar(startingX,startingY+2,size,ColorDownloadBack)
     horisontalBar(startingX,startingY+2,doneSize,ColorDownloadFront)
+    centerText("x",startingY+4,"Done "..action,colors.blue,colors.white)
 end
 
 function progressBar2(size,action,percent,action2)
