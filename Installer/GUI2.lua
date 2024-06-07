@@ -33,7 +33,7 @@ function progressBar(size,action,percent,action2)
     centerText("x",startingY,"Installing update",colors.blue,colors.white)
     horisontalBar(startingX,startingY+2,size,ColorDownloadBack)
     horisontalBar(startingX,startingY+2,doneSize,ColorDownloadFront)
-    сenterText("x",startingY+2,colors.white)
+    centerText("x",startingY+2,colors.white)
     centerText("x",startingY+4,"Done"..action,colors.black,colors.white)
 end
 
