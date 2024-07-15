@@ -11,7 +11,8 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------
 -- Делаем запрос для скачивания инсталлера и проверяем наличие ответа сервера
 
-local response = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/Installer.lua")
+local link = "https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/Installer.lua"
+local response = http.get(link)
 
 if not response then
 	FancyError()
