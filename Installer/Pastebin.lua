@@ -9,6 +9,7 @@ function FancyError()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------
+-- Делаем запрос для скачивания инсталлера и проверяем наличие ответа сервера
 
 response = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/Installer.lua")
 
