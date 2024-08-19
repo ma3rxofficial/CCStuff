@@ -5,7 +5,7 @@ function FancyError()
   print("Can't connect to github.com")
 end
 
-API_zapros = http.get("http://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
+API_zapros = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
 
 if not API_zapros then
 	FancyError()
@@ -16,7 +16,7 @@ APIfile = fs.open("windows", "w")
 APIfile.write(API_zapros.readAll())
 APIfile.close()
 
-if not http.get("http://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
+if not http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
 	FancyError()
 end
 
@@ -516,7 +516,7 @@ end
 
 subTitle = 'Determining Latest Version'
 Draw()
-local releases = downloadJSON('http://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/releases')
+local releases = downloadJSON('https://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/releases')
 local latestReleaseTag = releases[1].tag_name
 if not tArgs or #tArgs ~= 1 and tArgs[1] ~= 'beta' then
 	for i, v in ipairs(releases) do
@@ -528,13 +528,13 @@ if not tArgs or #tArgs ~= 1 and tArgs[1] ~= 'beta' then
 end
 subTitle = 'Optaining Latest Version URL'
 Draw()
-local refs = downloadJSON('http://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/git/refs/tags/'..latestReleaseTag)
+local refs = downloadJSON('https://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/git/refs/tags/'..latestReleaseTag)
 local latestReleaseSha = refs.object.sha
 
 subTitle = 'Downloading File Listing'
 Draw()
 
-local tree = downloadJSON('http://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/git/trees/'..latestReleaseSha..'?recursive=1').tree
+local tree = downloadJSON('https://api.github.com/repos/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/git/trees/'..latestReleaseSha..'?recursive=1').tree
 
 local blacklist = {
 	'/.gitignore',
@@ -586,13 +586,13 @@ function downloadBlob(v)
 
         local tries, f = 0
         repeat 
-			f = http.get(('http://raw.github.com/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/'..tostring(latestReleaseTag)..Settings.InstallPath..v.path)) --:gsub(' ','%%20'))
+			f = http.get(('https://raw.github.com/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/'..tostring(latestReleaseTag)..Settings.InstallPath..v.path)) --:gsub(' ','%%20'))
                 if not f then sleep(5) end
                 tries = tries + 1
         until tries > 5 or f
 
 		if not f then
-			error('Downloading failed, try again. '..('http://raw.github.com/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/'..latestReleaseTag..Settings.InstallPath..v.path):gsub(' ','%%20'))
+			error('Downloading failed, try again. '..('https://raw.github.com/'..Settings.GitHubUsername..'/'..Settings.GitHubRepoName..'/'..latestReleaseTag..Settings.InstallPath..v.path):gsub(' ','%%20'))
 		end
 
 		local h = fs.open('/'..Settings.InstallPath..v.path, 'w')
