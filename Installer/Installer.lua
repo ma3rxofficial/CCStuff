@@ -16,7 +16,7 @@ APIfile = fs.open("windows", "w")
 APIfile.write(API_zapros.readAll())
 APIfile.close()
 
-if not http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
+if not http.get("http://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua") then
 	FancyError()
 end
 
