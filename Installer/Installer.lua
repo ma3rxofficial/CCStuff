@@ -5,7 +5,7 @@ function FancyError()
   print("Can't connect to github.com")
 end
 
-API_zapros = http.get("https://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
+API_zapros = http.get("http://raw.githubusercontent.com/ma3rxofficial/CCStuff/main/Installer/GUI.lua")
 
 if not API_zapros then
 	FancyError()
