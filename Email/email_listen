@@ -17,7 +17,7 @@ function split(str, pat)
   return t
 end
 
-rednet.open("left")
+rednet.open("top")
 rednet.send(434, "$REQUEST")
 
 id, msg = rednet.receive()
