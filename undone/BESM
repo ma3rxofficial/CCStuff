@@ -1,0 +1,133 @@
+-- Базовый эмулятор процессора БЭСМ-6 для ComputerCraft (CraftOS 1.4, Lua)
+
+-- Инициализация памяти и регистров
+local count = 54
+local memory = {} -- Память процессора
+local registers = {} -- 54 регистра
+for i = 1, count do
+    registers[i] = 0 -- Все регистры начинаются с 0
+end
+
+-- Инициализация монитора (подключение к устройству)
+local monitor = peripheral.wrap("back:green") -- Монитор на задней стороне
+monitor.setTextScale(1) -- Размер шрифта
+monitor.setBackgroundColor(colors.black) -- Черный фон
+monitor.clear() -- Очистка экрана
+
+_, h = monitor.getSize()
+
+-- Функция для отрисовки лампочек на мониторе (оранжевые и черные)
+local function drawLamp(x, y, value)
+    -- Рисуем квадрат 3x3 (размер лампочки)
+    local color = (value > 0) and colors.orange or colors.black
+    monitor.setBackgroundColor(color)
+    
+    for dy = 0, 2 do
+        for dx = 0, 2 do
+            monitor.setCursorPos(x + dx, y + dy)
+            monitor.write(" ") -- Рисуем квадрат
+        end
+    end
+end
+
+-- Функция для обновления всех лампочек
+local function updateLamps()
+    local lampIndex = 1
+    local startX, startY = 2, 2
+
+    -- Проходим по всем 54 регистрами, деля их на 3 части
+    for part = 1, 3 do
+        for i = 1, 17 do
+            local x = startX + (i - 1) * 4
+            local y = startY + (part - 1) * 6
+            drawLamp(x, y, registers[lampIndex])
+            lampIndex = lampIndex + 1
+        end
+
+        -- Разделитель между частями (рисуем вертикальную линию)
+        if part < 3 then
+            local dividerX
+
+            if part == 1 then
+                dividerX = startX + 15
+            elseif part == 2 then
+                dividerX = startX + 51
+            end
+
+            for row = 0, h do
+                monitor.setCursorPos(dividerX, startY+row)
+                print(dividerX, " ", startY + row)
+                monitor.setBackgroundColor(colors.black)
+                monitor.write("|")
+
+                for h_ = 1, 16 do
+                    monitor.setCursorPos(71, h_)
+                    monitor.write(registers[h_])
+                end
+            end
+        end
+    end
+end
+
+-- Функция загрузки данных в память
+local function loadMemory(address, value)
+    memory[address] = value
+end
+
+-- Функция для разделения строки по пробелу
+function split(str, delimiter)
+    local result = {}
+    for match in (str..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match)
+    end
+    return result
+end
+
+-- Функция для выполнения базовых команд
+local function executeCommand(command)
+    local cmd = split(command, " ")
+    local op = cmd[1]
+    
+    if op == "ADD" then
+        -- ADD A B: A = A + B
+        local reg1 = tonumber(cmd[2])
+        local reg2 = tonumber(cmd[3])
+        registers[reg1] = registers[reg1] + registers[reg2]
+        print("ADD: " .. reg1 .. " = " .. registers[reg1])
+    
+    elseif op == "SUB" then
+        -- SUB A B: A = A - B
+        local reg1 = tonumber(cmd[2])
+        local reg2 = tonumber(cmd[3])
+        registers[reg1] = registers[reg1] - registers[reg2]
+        print("SUB: " .. reg1 .. " = " .. registers[reg1])
+    
+    elseif op == "LOAD" then
+        -- LOAD A 10: загрузить 10 в регистр A
+        local reg1 = tonumber(cmd[2])
+        local value = tonumber(cmd[3])
+        registers[reg1] = value
+        print("LOAD: " .. reg1 .. " = " .. registers[reg1])
+    
+    elseif op == "NOP" then
+        -- NOP: нет операции (пауза)
+        print("NOP: No Operation")
+    end
+
+    -- Обновление лампочек после выполнения команды
+    updateLamps()
+end
+
+-- Основной цикл для выполнения операций
+while true do
+    -- Мигание регистров: чередуем значения
+    for i = 1, count do
+        registers[i] = math.random(0, 1)  -- Случайное значение 0 или 1
+    end
+
+    -- Обновление лампочек на экране
+    updateLamps()
+
+    -- Задержка для наглядности (с маленьким интервалом)
+    sleep(0.5)  -- Ожидание 0.5 секунды
+end
